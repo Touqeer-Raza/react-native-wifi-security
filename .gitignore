@@ -1,0 +1,19 @@
+node_modules/
+*.log
+.DS_Store
+*.tgz
+
+# lib/ is committed on purpose: npm 11+ doesn't run `prepare` for git dependencies unless approved,
+# so apps installing from git would otherwise get no compiled types. Run `npm run build` before committing.
+
+# Android
+android/build/
+android/.gradle/
+android/.cxx/
+android/local.properties
+*.iml
+.idea/
+
+# iOS
+ios/build/
+xcuserdata/

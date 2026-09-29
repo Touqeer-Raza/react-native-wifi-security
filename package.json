@@ -1,0 +1,78 @@
+{
+  "name": "react-native-wifi-security",
+  "version": "1.0.0",
+  "description": "Blocks a React Native app on open (password-less), WEP, Enhanced Open and captive-portal Wi-Fi. Drop-in wrapper with native Android and iOS Wi-Fi security detection, a ready gate screen and an HTTP guard.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "react-native": "src/index.ts",
+  "source": "src/index.ts",
+  "files": [
+    "src",
+    "lib",
+    "android/build.gradle",
+    "android/src/main",
+    "ios",
+    "react-native-wifi-security.podspec",
+    "!**/__tests__"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "keywords": [
+    "react-native",
+    "wifi",
+    "open-wifi",
+    "public-wifi",
+    "wifi-security",
+    "network-security",
+    "captive-portal",
+    "security",
+    "android",
+    "ios",
+    "react-native-wifi",
+    "unsecured-wifi"
+  ],
+  "author": "Touqeer Raza (https://github.com/Touqeer-Raza)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Touqeer-Raza/react-native-wifi-security.git"
+  },
+  "homepage": "https://github.com/Touqeer-Raza/react-native-wifi-security#readme",
+  "bugs": {
+    "url": "https://github.com/Touqeer-Raza/react-native-wifi-security/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.71.0"
+  },
+  "devDependencies": {
+    "@react-native/babel-preset": "0.77.2",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^18.3.12",
+    "@types/react-test-renderer": "^18.3.1",
+    "jest": "^29.7.0",
+    "react": "18.3.1",
+    "react-native": "0.77.2",
+    "react-test-renderer": "18.3.1",
+    "typescript": "^5.6.3"
+  },
+  "jest": {
+    "preset": "react-native",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/lib/",
+      "<rootDir>/example/"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.ts?(x)"
+    ]
+  }
+}

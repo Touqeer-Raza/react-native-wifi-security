@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!-- Merged into the app's manifest automatically. -->
+
+  <!-- Connection type and network change callbacks -->
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <!-- Connected Wi-Fi info and cached scan results -->
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <!--
+    Only asked for when the security type can't be read without it (mainly Android 10-11, where the OS hides the
+    connected access point unless the app has precise location). Foreground only; no background location.
+    Android 12+ requires FINE and COARSE to be declared together.
+  -->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+</manifest>
