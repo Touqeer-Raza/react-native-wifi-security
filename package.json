@@ -1,6 +1,6 @@
 {
   "name": "react-native-wifi-security",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Blocks a React Native app on open (password-less), WEP, Enhanced Open and captive-portal Wi-Fi. Drop-in wrapper with native Android and iOS Wi-Fi security detection, a ready gate screen and an HTTP guard.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
