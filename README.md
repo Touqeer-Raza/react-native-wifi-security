@@ -150,7 +150,7 @@ Android needs nothing: React Native autolinking registers `OpenWifiGuardPackage`
    <string>Your location is used only to check that your Wi-Fi network is secure. It is not stored or shared.</string>
    ```
 
-   Without it, iOS silently ignores the permission request. The guard logs a warning and the user stays on "Wi-Fi can't be verified".
+   Without it, iOS silently ignores the permission request. The guard logs a warning and the user stays on "Location access needed".
 
 2. **Access Wi-Fi Information entitlement**: in Xcode, open *Target → Signing & Capabilities → + Capability → Access WiFi Information*. Or add it to your `.entitlements` file:
 
@@ -455,10 +455,10 @@ guard.openAppSettings()
 | State | Title (built-in) | Primary button | Secondary |
 |---|---|---|---|
 | `UNSAFE` | Unsafe Wi-Fi network | Android: **Wi-Fi settings**; iOS: **Try again** (+ "Settings → Wi-Fi" hint) | Try again (Android) |
-| `NEEDS_PERMISSION` | Check your Wi-Fi | **Continue** → OS location prompt | Wi-Fi settings (Android) |
+| `NEEDS_PERMISSION` | Location access needed | **Continue** → OS location prompt | Wi-Fi settings (Android) |
 | `LOCATION_OFF` | Turn on Location | **Turn on Location** | Try again |
-| `CANNOT_VERIFY` (permission denied) | Wi-Fi can't be verified | **Allow location** (if the OS can still ask) or **Open Settings** | Try again |
-| `CANNOT_VERIFY` (approximate location) | Wi-Fi can't be verified | **Open Settings** (turn on Precise Location) | Try again |
+| `CANNOT_VERIFY` (permission denied) | Location access needed | **Allow location** (if the OS can still ask) or **Open Settings** | Try again |
+| `CANNOT_VERIFY` (approximate location) | Precise location needed | **Open Settings** (turn on Precise Location) | Try again |
 | `CANNOT_VERIFY` (error / timeout / unsupported) | Wi-Fi can't be verified | **Try again** | Wi-Fi settings (Android) |
 
 The gate re-checks by itself when the user comes back from Settings (app foreground) and whenever the network changes. "Try again" is just a manual shortcut.
@@ -469,7 +469,7 @@ The gate re-checks by itself when the user comes back from Settings (app foregro
 
 **Text and colors**: use `messages`, `theme`, `darkTheme` and `icon` (see Step 5).
 
-- `OpenWifiGuardMessages` keys: `unsafeTitle`, `unsafeMessage`, `permissionTitle`, `permissionMessage`, `cannotVerifyTitle`, `cannotVerifyPermissionMessage`, `cannotVerifyApproximateMessage`, `cannotVerifyErrorMessage`, `unsupportedMessage`, `locationOffTitle`, `locationOffMessage`, `iosWifiHint`, `wifiSettings`, `tryAgain`, `continue`, `allowLocation`, `openSettings`, `turnOnLocation`. The default values are exported as `englishMessages`.
+- `OpenWifiGuardMessages` keys: `unsafeTitle`, `unsafeMessage`, `permissionTitle`, `permissionMessage`, `cannotVerifyTitle`, `locationDeniedTitle`, `cannotVerifyPermissionMessage`, `preciseLocationTitle`, `cannotVerifyApproximateMessage`, `cannotVerifyErrorMessage`, `unsupportedMessage`, `locationOffTitle`, `locationOffMessage`, `iosWifiHint`, `wifiSettings`, `tryAgain`, `continue`, `allowLocation`, `openSettings`, `turnOnLocation`. The default values are exported as `englishMessages`.
 - `GateTheme` keys: `background`, `text`, `textSecondary`, `icon`, `accent`, `primary`, `onPrimary`, `link`, `fontFamily`, `fontFamilyBold`.
 
 **Your own screen**: `renderGate` receives the same controller as `useOpenWifiGuard()`. The guard still positions it full-screen over the app, hides the app from screen readers, disables the Android back button and dismisses the keyboard.
@@ -589,7 +589,7 @@ Turn on `debug` to see every check in the Metro log:
 | Symptom | Cause / fix |
 |---|---|
 | Nothing happens; state is always `SAFE`; `guard.active === false` | The native module isn't linked. Rebuild the app (not just Metro). iOS: run `pod install`. Check `NativeModules.OpenWifiGuard` isn't `undefined`. |
-| iOS: every Wi-Fi shows "Wi-Fi can't be verified" | Missing *Access Wi-Fi Information* entitlement or provisioning profile, or location not granted or only approximate. Turn on `debug` and look at `source` (should be `HOTSPOT`) and `permission`. |
+| iOS: every Wi-Fi shows "Wi-Fi can't be verified" (or a location screen) | Missing *Access Wi-Fi Information* entitlement or provisioning profile, or location not granted or only approximate. Turn on `debug` and look at `source` (should be `HOTSPOT`) and `permission`. |
 | iOS: tapping "Continue" does nothing | `NSLocationWhenInUseUsageDescription` is missing (a warning is logged). |
 | Android 10/11: "Turn on Location" | The OS only reveals the connected access point with location services on. Expected. |
 | Android emulator always blocked | The emulator's `AndroidWifi` is typically open. See the recipe in §11. |

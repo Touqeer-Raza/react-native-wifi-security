@@ -98,7 +98,7 @@ export const getGateContent = (guard: OpenWifiGuardController, m: OpenWifiGuardM
     default:
       if (guard.cause === 'PERMISSION' || guard.cause === 'APPROXIMATE') {
         return {
-          title: m.cannotVerifyTitle,
+          title: guard.cause === 'APPROXIMATE' ? m.preciseLocationTitle : m.locationDeniedTitle,
           message: guard.cause === 'APPROXIMATE' ? m.cannotVerifyApproximateMessage : m.cannotVerifyPermissionMessage,
           primary: guard.canAskPermission
             ? { label: m.allowLocation, onPress: guard.askPermission }

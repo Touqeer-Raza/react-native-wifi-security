@@ -7,7 +7,11 @@ export interface OpenWifiGuardMessages {
     permissionTitle: string;
     permissionMessage: string;
     cannotVerifyTitle: string;
+    /** Title when location was denied */
+    locationDeniedTitle: string;
     cannotVerifyPermissionMessage: string;
+    /** Title when only approximate location is allowed */
+    preciseLocationTitle: string;
     cannotVerifyApproximateMessage: string;
     cannotVerifyErrorMessage: string;
     unsupportedMessage: string;
